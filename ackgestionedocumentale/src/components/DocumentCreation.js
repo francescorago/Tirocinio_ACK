@@ -595,9 +595,11 @@ const DocumentCreation = () => {
                 onChange={handleDropdownChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
               >
-                <option value="">-- Seleziona --</option>
-                <option value="option1">Dipinto</option>
-                <option value="option2">Scultura</option>
+                <option value="">-- Modalità di formazione DOC --</option>
+                <option value="option1">Creazione diretta</option>
+                <option value="option2">Acquisizione analogica</option>
+                <option value="option3">Memorizzazione digitale</option>
+                <option value="option4">Generazione Automatica</option>
               </select>
             </div>
 
