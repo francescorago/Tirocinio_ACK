@@ -51,8 +51,7 @@ const Home = () => {
         Benvenuto {user ? user.informazioniUtente.nome : "Utente"}
       </div>
       <div className="flex justify-center text-xl mt-4 mb-4 ">
-        Ecco la tua lista di documenti firmatii
-        
+        Ecco la tua lista di documenti 
       </div>
     
       <DocumentTable
