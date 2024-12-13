@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
         } else {
           setUser(null);
           console.log("Nessun utente autenticato"); // Aggiungi un log
-        }
+        } 
       });
   
       return () => unsubscribe();
