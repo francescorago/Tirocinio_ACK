@@ -1,0 +1,343 @@
+.home-container {
+    padding: 16px;
+  }
+  .boxes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    height: 700px;
+  }
+  
+  
+  .box h2 {
+    margin-top: 0;
+  }
+  .box p{
+    margin-top: 5px;
+    color: #fff;
+  }
+  
+  
+  .bottoneApri {
+    position: relative;
+    margin-top: 1.5rem;
+    padding: 8px 16px;
+    background-color: #007bff; /* Colore di sfondo */
+    border: 1px solid #fff;
+    color: #fff; /* Colore del testo */
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 200px;
+    
+  }
+  
+  .bottoneApri:hover {
+    background-color: #0056b3; /* Colore di sfondo al passaggio del mouse */
+  }
+  
+  .space-evenly {
+    justify-content: space-evenly;
+  }
+  
+  @media (min-width: 1024px) {
+    .flexed-boxes {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  
+    .box {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 8px;
+      width: 50vh;
+      height: 50vh;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .bottoneApri {
+      position: relative;
+      padding: 8px 16px;
+      background-color: #007bff; /* Colore di sfondo */
+      border: 1px solid #fff;
+      color: #fff; /* Colore del testo */
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 200px;
+    }
+  
+    .container-details{
+      height: 50vh;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .box {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .bottoneApri {
+      position: relative;
+      margin-top: 1.5rem;
+      padding: 8px 16px;
+      background-color: #007bff; /* Colore di sfondo */
+      border: 1px solid #fff;
+      color: #fff; /* Colore del testo */
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 200px;
+    }
+  
+    .container-details{
+      height: 50vh;
+    }
+  }
+  
+  .header-logout-btn {
+    background-color: #32746d ;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 3px 10px;
+    height: 32px;
+  }
+  
+  .coloreCustomHeader {
+  background-color: #fff;
+  z-index: 1000;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* X-offset, Y-offset, Blur, Color */
+  
+  }
+  
+  .transition-transform {
+    transition: transform 0.5s ease, background-color 0.5s ease;
+  }
+  
+  @keyframes zoom {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .scale-down {
+    animation: zoom 0.4s ease;
+  }
+  
+  .modalEndButtons{
+    display: flex;
+      justify-content: space-between;
+      padding: 10px; /* Opzionale: per aggiungere un po' di spazio interno */
+  
+  }
+  .labelTitle{
+    font-size: small;
+  }
+  /* Aggiungi queste regole al tuo file CSS globale */
+  body.modal-open {
+    overflow: hidden;
+  }
+  .modal-open{
+    overflow: hidden;
+  
+  }
+  
+  
+  
+  
+  
+  .header-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .header-hidden {
+    opacity: 0;
+    visibility: hidden;}
+  
+  
+  .avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .avatar-icon {
+    width: 80px; /* Imposta la larghezza desiderata */
+    height: 80px; /* Imposta l'altezza desiderata */
+    object-fit: cover; /* Assicura che l'immagine non distorca */
+    border: 2px solid #333; /* Spessore, Tipo di bordo, Colore (in questo caso blu) */
+    border-radius: 50%; /* Per creare un contorno arrotondato */
+  }
+  
+  .sidebar-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 16px; /* Spazio a sinistra */
+  }
+  
+  .sidebar-toggle-line {
+    width: 30px;
+    height: 3px;
+    background: #000000;
+    margin: 5px 0;
+    transition: background 0.3s ease;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Larghezza della sidebar */
+    height: 100vh; /* Altezza completa */
+    background-color: #fff; /* Colore di sfondo della sidebar */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3); /* Ombra per la sidebar */
+    z-index: 1000; /* Assicurati che la sidebar sia sopra il contenuto */
+    transition: transform 0.3s ease;
+    transform: translateX(-100%); /* Inizialmente fuori dallo schermo */
+  }
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    margin: 60px 0;
+    font-size: 26px;
+    width: 190px;
+    height: 20px;
+  }
+  .sidebar a {
+    display: block;
+    padding: 10px 20px;
+    color: black; /* Colore del testo */
+    text-decoration: none;
+    font-size: 28px;
+  }
+  
+  
+  
+  .sidebar-open {
+    transform: translateX(0); /* Mostra la sidebar */
+  }
+  
+  .close-sidebar {
+    position: absolute;
+    top: 0px; /* Spazio dall'alto */
+    right: 15px; /* Spazio dal lato destro */
+    background: none;
+    border: none;
+    font-size: 60px; /* Aumenta la dimensione del font */
+    color: #333; /* Colore del testo, personalizzabile */
+    cursor: pointer;
+    transition: color 0.3s ease; /* Aggiungi transizione per un effetto di cambio colore */
+  }
+  
+  
+  /* styles.css */
+  
+  .modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+  }
+  
+  .modal-header {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .modal-footer {
+    padding-top: 1rem;
+    border-top: 1px solid #eaeaea;
+    text-align: right;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .modal-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .loader {
+    border-top-color: #3498db;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /*per la pagina home lato utente*/
+  .custom-border {
+    padding: 2px 4px;
+    border: 2px solid #E26274;
+    border-radius: 20px;
+    background-color: #e6a8b0;
+    color: #fff;
+    font-weight:700;
+    
+  }
+  .custom-border1 {
+    padding: 2px 4px;
+    border: 2px solid #000000;
+    border-radius: 20px;
+    background-color: #5e5e61;
+    color: #fff;
+    font-weight:700;
+    
+  }
+  .swal2-confirm {
+    background-color: #3085d6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  /* Nascondi scrollbar */
+.custom-scroll {
+  scrollbar-width: thin; /* Nascondi scrollbar su Firefox */
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 8px; /* Nascondi scrollbar su Webkit (Chrome, Safari) */
+}
