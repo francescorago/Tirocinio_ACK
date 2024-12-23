@@ -9,9 +9,12 @@ const Register = () => {
     nome: "",
     cognome: "",
     data: "",
+    luogo:"",
+    nazione:"",
     codiceFiscale: "",
     partitaIVA: "",
     indirizzo:"",
+    attività:"",
   });
 
   const [email, setEmail] = useState("");
@@ -20,7 +23,7 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
-
+  const [selectedOption, setSelectedOption] = useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,7 +82,9 @@ const Register = () => {
       }
     }
   };
-
+  const handleDropdownChange = (e) => {
+    setSelectedOption(e.target.value); // Set the selected value
+  };
   return (
     <div className="flex items-start justify-center bg-gray-100 p-4">
       <div className="w-full sm:w-11/12 md:w-8/12 lg:w-6/12 xl:w-5/12 text-gray-600 space-y-5 p-6 sm:p-8 md:p-10 pb-10 shadow-xl border rounded-xl bg-white">
@@ -146,6 +151,37 @@ const Register = () => {
                 ></label>
                 </div>
 
+          {/*Campo Luogo Nascita*/}
+          <div>
+            <label className="block text-sm text-gray-600 font-bold mb-1">
+              Luogo di Nascita<strong className="text-red-500">*</strong>
+            </label>
+            <input
+              type="text"
+              name="Luogo di Nascita"
+              placeholder="Inserisci dove sei nato"
+              required
+              value={registerData.luogo}
+              onChange={handleChange}
+              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+            />
+          </div>
+
+          {/*Campo Luogo Nascita*/}
+          <div>
+            <label className="block text-sm text-gray-600 font-bold mb-1">
+              Nazione<strong className="text-red-500">*</strong>
+            </label>
+            <input
+              type="text"
+              name="Nazione"
+              placeholder="Inserisci la tua nazione"
+              required
+              value={registerData.nazione}
+              onChange={handleChange}
+              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+            />
+          </div>
           
           {/* Campo Codice Fiscale */}
           <div>
@@ -163,6 +199,8 @@ const Register = () => {
             />
           </div>
 
+          
+          
           <div>
             <label className="block text-sm text-gray-600 font-bold mb-1">
               Indirizzo<strong className="text-red-500">*</strong>
@@ -178,19 +216,26 @@ const Register = () => {
             />
           </div>
           
-          {/* Campo Partita IVA */}
+          {/* Campo Attività */}
           <div>
             <label className="block text-sm text-gray-600 font-bold mb-1">
-              Partita IVA
+              Attività<strong className="text-red-500">*</strong>
             </label>
-            <input
-              type="text"
-              name="partitaIVA"
-              placeholder="Inserisci la tua partita IVA"
-              value={registerData.partitaIVA}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-            />
+            <select
+            id="options"
+                name="options"
+                value={selectedOption}
+                onChange={handleDropdownChange}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            >
+              <option value="">-- Scegli attività --</option>
+                <option value="option1">Artista</option>
+                <option value="option2">Proprietario Opere</option>
+                <option value="option3">Galleria </option>
+                <option value="option4">Esperto</option>
+                <option value="option5">Mercante</option>
+                <option value="option6">Museo</option>
+            </select>
           </div>
           
           {/* Campo Email */}
