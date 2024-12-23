@@ -8,6 +8,7 @@ const Register = () => {
   const [registerData, setRegisterData] = useState({
     nome: "",
     cognome: "",
+    data: "",
     codiceFiscale: "",
     partitaIVA: "",
     indirizzo:"",
@@ -66,6 +67,9 @@ const Register = () => {
 
   const handleChange = (e) => {
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
+  
+    
+
 
     if (e.target.name === 'codiceFiscale') {
       if (!validateCodiceFiscale(e.target.value)) {
@@ -116,6 +120,32 @@ const Register = () => {
               className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
             />
           </div>
+          
+
+          {/*Campo Data di Nascita*/}
+          <div ClassName="mb-4">
+            <label htmlFor="data"
+            className="block text-sm font-medium text-gray-700"
+            >
+              Data di Nascita<strong className="text-red-500">*</strong>                
+            </label>
+            <input
+            required
+            type="date"
+            name="data"
+            id="data"
+            value={registerData.data}
+            onChange={handleChange}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+            </div>
+            <div ClassName="mb-4">
+              <label
+                htmlFor="data"
+                className="block text-sm font-medium text-gray-700"
+                ></label>
+                </div>
+
           
           {/* Campo Codice Fiscale */}
           <div>
