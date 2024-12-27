@@ -169,7 +169,7 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="Luogo di Nascita"
+              name="luogo"
               placeholder="Inserisci dove sei nato"
               required
               value={registerData.luogo}
@@ -185,7 +185,7 @@ const Register = () => {
             </label>
             <input
               type="text"
-              name="Nazione"
+              name="nazione"
               placeholder="Inserisci la tua nazione"
               required
               value={registerData.nazione}
