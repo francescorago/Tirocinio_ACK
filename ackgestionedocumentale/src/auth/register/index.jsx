@@ -17,6 +17,17 @@ const Register = () => {
     attività:"",
   });
 
+  const onlyLettersHandleChange = (e) => {
+    const value = e.target.value;
+    // Consenti solo lettere (inclusi caratteri accentati e spazi)
+    const isValid = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]*$/.test(value);
+    
+    if (isValid) {
+      handleChange(e);
+    }
+  };
+  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -105,7 +116,7 @@ const Register = () => {
               placeholder="Inserisci il tuo nome"
               required
               value={registerData.nome}
-              onChange={handleChange}
+              onChange={onlyLettersHandleChange}
               className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
             />
           </div>
@@ -121,7 +132,7 @@ const Register = () => {
               placeholder="Inserisci il tuo cognome"
               required
               value={registerData.cognome}
-              onChange={handleChange}
+              onChange={onlyLettersHandleChange}
               className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
             />
           </div>
@@ -162,7 +173,7 @@ const Register = () => {
               placeholder="Inserisci dove sei nato"
               required
               value={registerData.luogo}
-              onChange={handleChange}
+              onChange={onlyLettersHandleChange}
               className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
             />
           </div>
@@ -178,7 +189,7 @@ const Register = () => {
               placeholder="Inserisci la tua nazione"
               required
               value={registerData.nazione}
-              onChange={handleChange}
+              onChange={onlyLettersHandleChange}
               className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
             />
           </div>
@@ -216,7 +227,7 @@ const Register = () => {
             />
           </div>
           
-          {/* Campo Attività */}
+          {/* Campo Utente */}
           <div>
             <label className="block text-sm text-gray-600 font-bold mb-1">
               Utente<strong className="text-red-500">*</strong>
