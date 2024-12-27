@@ -219,7 +219,7 @@ const Register = () => {
           {/* Campo Attività */}
           <div>
             <label className="block text-sm text-gray-600 font-bold mb-1">
-              Attività<strong className="text-red-500">*</strong>
+              Utente<strong className="text-red-500">*</strong>
             </label>
             <select
             id="options"
@@ -228,7 +228,7 @@ const Register = () => {
                 onChange={handleDropdownChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
             >
-              <option value="">-- Scegli attività --</option>
+              <option value="">-- Scegli Utente --</option>
                 <option value="option1">Artista</option>
                 <option value="option2">Proprietario Opere</option>
                 <option value="option3">Galleria </option>
