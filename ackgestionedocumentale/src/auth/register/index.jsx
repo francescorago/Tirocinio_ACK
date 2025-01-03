@@ -10,6 +10,14 @@ const Register = () => {
     cognome: "",
     data: "",
     luogo:"",
+    pec: "",
+    nickname1: "",
+    nickname2: "",
+    nickname3: "",
+    indirizzoLaboratorio: "",
+    indirizzoLaboratorio2: "",
+    depositi: "",
+    sitoWeb: "",
     nazione:"",
     codiceFiscale: "",
     partitaIVA: "",
@@ -27,7 +35,21 @@ const Register = () => {
     }
   };
   
-
+  const [isFatturazioneEnabled, setIsFatturazioneEnabled] = useState(null);
+  const handleInputChange = (e) => {
+    setRegisterData({
+      ...registerData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleFatturazioneChange = (value) => {
+    setRegisterData((prevState) => ({
+      ...prevState,
+      fatturazione: value,
+    }));
+  };
+  
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -240,15 +262,153 @@ const Register = () => {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
             >
               <option value="">-- Scegli Utente --</option>
-                <option value="option1">Artista</option>
-                <option value="option2">Proprietario Opere</option>
-                <option value="option3">Galleria </option>
-                <option value="option4">Esperto</option>
-                <option value="option5">Mercante</option>
-                <option value="option6">Museo</option>
+                <option value="Artista">Artista</option>
+                <option value="Proprietario">Proprietario Opere</option>
+                <option value="Galleria">Galleria </option>
+                <option value="Esperto">Esperto</option>
+                <option value="Mercante">Mercante</option>
+                <option value="Museo">Museo</option>
             </select>
           </div>
-          
+
+
+
+
+          {/*<div>
+            <label className="block text-sm text-gray-600 font-bold mb-1">
+              Nome<strong className="text-red-500">*</strong>
+            </label>
+            <input
+              type="text"
+              name="nome"
+              placeholder="Inserisci il tuo nome"
+              required
+              value={registerData.nome}
+              onChange={onlyLettersHandleChange}
+              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+            />
+          </div>*/}
+          {selectedOption === "Artista" && (
+  <div className="space-y-4 border-t pt-4 mt-4">
+    <h4 className="text-lg font-bold">Dati aggiuntivi - Artista</h4>
+
+    <div>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+              Partita IVA<strong className="text-red-500">*</strong>
+            </label>
+      <input
+        type="text"
+        name="partitaIVA"
+        placeholder="Inserisci Partita IVA"
+        value={registerData.partitaIVA}
+        onChange={handleInputChange}
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
+    </div>
+
+    <div>
+      <label>PEC*</label>
+      <input
+        type="email"
+        name="pec"
+        value={registerData.pec}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Nickname 1</label>
+      <input
+        type="text"
+        name="nickname1"
+        value={registerData.nickname1}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Nickname 2</label>
+      <input
+        type="text"
+        name="nickname2"
+        value={registerData.nickname2}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Nickname 3</label>
+      <input
+        type="text"
+        name="nickname3"
+        value={registerData.nickname3}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Indirizzo Laboratorio</label>
+      <input
+        type="text"
+        name="indirizzoLaboratorio"
+        value={registerData.indirizzoLaboratorio}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Indirizzo Laboratorio 2</label>
+      <input
+        type="text"
+        name="indirizzoLaboratorio2"
+        value={registerData.indirizzoLaboratorio2}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Depositi</label>
+      <input
+        type="text"
+        name="depositi"
+        value={registerData.depositi}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Sito Web</label>
+      <input
+        type="text"
+        name="sitoWeb"
+        value={registerData.sitoWeb}
+        onChange={handleInputChange}
+      />
+    </div>
+
+    <div>
+      <label>Fatturazione Elettronica (Scegli con una X)</label>
+      <div>
+        <button onClick={() => handleFatturazioneChange(true)}>Sì</button>
+        <button onClick={() => handleFatturazioneChange(false)}>No</button>
+      </div>
+    </div>
+  </div>
+)}
+{selectedOption === "Proprietario" && (
+  <div>
+    <h4 className="text-lg font-bold">Dati aggiuntivi - Proprietario</h4>
+    <input
+      type="text"
+      name="proprietàRegistrate"
+      placeholder="Proprietà registrate"
+      value={registerData.proprietàRegistrate || ""}
+      onChange={handleInputChange}
+    />
+  </div>
+)}
+
+
           {/* Campo Email */}
           <div>
             <label className="block text-sm text-gray-600 font-bold mb-1">
