@@ -23,6 +23,10 @@ const Register = () => {
     partitaIVA: "",
     indirizzo:"",
     attività:"",
+    sede1:"",
+    sede2:"",
+    responsabile1:"",
+    responsabile2:"",
   });
 
   const onlyLettersHandleChange = (e) => {
@@ -42,7 +46,8 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleFatturazioneChange = (value) => {
+  const handleFatturazioneChange = (e) => {
+    const value = e.target.value === "true"; // Converte il valore stringa in booleano
     setRegisterData((prevState) => ({
       ...prevState,
       fatturazione: value,
@@ -272,23 +277,7 @@ const Register = () => {
           </div>
 
 
-
-
-          {/*<div>
-            <label className="block text-sm text-gray-600 font-bold mb-1">
-              Nome<strong className="text-red-500">*</strong>
-            </label>
-            <input
-              type="text"
-              name="nome"
-              placeholder="Inserisci il tuo nome"
-              required
-              value={registerData.nome}
-              onChange={onlyLettersHandleChange}
-              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-            />
-          </div>*/}
-          {selectedOption === "Artista" && (
+  {selectedOption === "Artista" && (
   <div className="space-y-4 border-t pt-4 mt-4">
     <h4 className="text-lg font-bold">Dati aggiuntivi - Artista</h4>
 
@@ -307,106 +296,233 @@ const Register = () => {
     </div>
 
     <div>
-      <label>PEC*</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+              PEC<strong className="text-red-500">*</strong>
+            </label>
       <input
         type="email"
         name="pec"
         value={registerData.pec}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Nickname 1</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Nickname 1</label>
       <input
         type="text"
         name="nickname1"
         value={registerData.nickname1}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Nickname 2</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Nickname 2</label>
       <input
         type="text"
         name="nickname2"
         value={registerData.nickname2}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Nickname 3</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Nickname 3</label>
       <input
         type="text"
         name="nickname3"
         value={registerData.nickname3}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Indirizzo Laboratorio</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Indirizzo Laboratorio</label>
       <input
         type="text"
         name="indirizzoLaboratorio"
         value={registerData.indirizzoLaboratorio}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Indirizzo Laboratorio 2</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Indirizzo Laboratorio 2</label>
       <input
         type="text"
         name="indirizzoLaboratorio2"
         value={registerData.indirizzoLaboratorio2}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Depositi</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Depositi</label>
       <input
         type="text"
         name="depositi"
         value={registerData.depositi}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Sito Web</label>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Sito Web</label>
       <input
         type="text"
         name="sitoWeb"
         value={registerData.sitoWeb}
         onChange={handleInputChange}
-      />
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
 
     <div>
-      <label>Fatturazione Elettronica (Scegli con una X)</label>
-      <div>
-        <button onClick={() => handleFatturazioneChange(true)}>Sì</button>
-        <button onClick={() => handleFatturazioneChange(false)}>No</button>
-      </div>
+  <label className="block text-sm text-gray-600 font-bold mb-1">
+    Fatturazione Elettronica<strong className="text-red-500">*</strong>
+  </label>
+  <div className="flex space-x-4">
+    <label className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="fatturazione"
+        value="true"
+        checked={registerData.fatturazione === true}
+        onChange={handleFatturazioneChange}
+        className="form-radio text-blue-600"
+      />
+      <span>Sì</span>
+    </label>
+    <label className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="fatturazione"
+        value="false"
+        checked={registerData.fatturazione === false}
+        onChange={handleFatturazioneChange}
+        className="form-radio text-blue-600"
+      />
+      <span>No</span>
+    </label>
+  </div>
+</div>
+
+  </div>
+)}
+{selectedOption === "Galleria" && (
+    <div>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Sede 1</label>
+      <input
+        type="text"
+        name="sede1"
+        value={registerData.sede1}
+        onChange={handleInputChange}
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
+            <div>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Sede 2</label>
+      <input
+        type="text"
+        name="sede2"
+        value={registerData.sede2}
+        onChange={handleInputChange}
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
     </div>
-  </div>
+    <div>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Responsabile Vendita 1</label>
+      <input
+        type="text"
+        name="responsabile1"
+        value={registerData.responsabile1}
+        onChange={handleInputChange}
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
+    </div>
+    <div>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Responsabile Vendita 2</label>
+      <input
+        type="text"
+        name="responsabile2"
+        value={registerData.responsabile2}
+        onChange={handleInputChange}
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
+    </div>
+    <div>
+      <label className="block text-sm text-gray-600 font-bold mb-1">
+      Sito Web</label>
+      <input
+        type="text"
+        name="sitoWeb"
+        value={registerData.sitoWeb}
+        onChange={handleInputChange}
+        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+        />
+    </div>
+
+    </div>
+
 )}
-{selectedOption === "Proprietario" && (
+{selectedOption === "Esperto" && (
   <div>
-    <h4 className="text-lg font-bold">Dati aggiuntivi - Proprietario</h4>
-    <input
-      type="text"
-      name="proprietàRegistrate"
-      placeholder="Proprietà registrate"
-      value={registerData.proprietàRegistrate || ""}
-      onChange={handleInputChange}
+  <label className="block text-sm text-gray-600 font-bold mb-1">
+  Sito Web</label>
+  <input
+    type="text"
+    name="sitoWeb"
+    value={registerData.sitoWeb}
+    onChange={handleInputChange}
+    className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
     />
-  </div>
+</div>
 )}
+{selectedOption === "Mercante" && (
+  <div>
+  <label className="block text-sm text-gray-600 font-bold mb-1">
+  Sito Web</label>
+  <input
+    type="text"
+    name="sitoWeb"
+    value={registerData.sitoWeb}
+    onChange={handleInputChange}
+    className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+    />
+</div>
+)}
+{selectedOption === "Museo" && (
+  <div>
+  <label className="block text-sm text-gray-600 font-bold mb-1">
+  Sito Web</label>
+  <input
+    type="text"
+    name="sitoWeb"
+    value={registerData.sitoWeb}
+    onChange={handleInputChange}
+    className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+    />
+</div>
+)}
+
 
 
           {/* Campo Email */}
