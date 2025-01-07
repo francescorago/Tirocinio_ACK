@@ -27,7 +27,28 @@ const Register = () => {
     sede2:"",
     responsabile1:"",
     responsabile2:"",
+    firma:"",
   });
+
+  const handleNazioneChange = (e) => {
+    const inputValue = e.target.value;
+  
+    // Permetti solo lettere (sia maiuscole che minuscole)
+    const onlyLetters = inputValue.replace(/[^a-zA-Z]/g, "");
+  
+    // Capitalizza la prima lettera e rende minuscole le altre
+    const formattedValue = onlyLetters.charAt(0).toUpperCase() + onlyLetters.slice(1).toLowerCase();
+  
+    setRegisterData((prevState) => ({
+      ...prevState,
+      nazione: formattedValue,
+    }));
+  };
+  
+  
+  // Per mostrare/nascondere il campo Codice Fiscale
+  const showCodiceFiscale = ["Italia", "Italy"].includes(registerData.nazione);
+  
 
   const onlyLettersHandleChange = (e) => {
     const value = e.target.value;
@@ -54,6 +75,13 @@ const Register = () => {
     }));
   };
   
+  const handleFirmaChange =(e)=>{
+    const value= e.target.value === "true";
+    setRegisterData((prevState)=>({
+      ...prevState,
+      firma: value,
+    }));
+  };
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -205,39 +233,75 @@ const Register = () => {
             />
           </div>
 
-          {/*Campo Luogo Nascita*/}
-          <div>
-            <label className="block text-sm text-gray-600 font-bold mb-1">
-              Nazione<strong className="text-red-500">*</strong>
-            </label>
-            <input
-              type="text"
-              name="nazione"
-              placeholder="Inserisci la tua nazione"
-              required
-              value={registerData.nazione}
-              onChange={onlyLettersHandleChange}
-              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-            />
-          </div>
-          
-          {/* Campo Codice Fiscale */}
-          <div>
-            <label className="block text-sm text-gray-600 font-bold mb-1">
-              Codice Fiscale<strong className="text-red-500">*</strong>
-            </label>
-            <input
-              type="text"
-              name="codiceFiscale"
-              placeholder="Inserisci il tuo codice fiscale"
-              required
-              value={registerData.codiceFiscale}
-              onChange={handleChange}
-              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-            />
-          </div>
+          {/* Campo Nazione */}
+<div>
+  <label className="block text-sm text-gray-600 font-bold mb-1">
+    Nazione<strong className="text-red-500">*</strong>
+  </label>
+  <input
+    type="text"
+    name="nazione"
+    placeholder="Inserisci la tua nazione"
+    required
+    value={registerData.nazione}
+    onChange={handleNazioneChange}
+    className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+  />
+</div>
 
-          
+{/* Campo Codice Fiscale - Mostrato solo se Nazione è Italia */}
+{showCodiceFiscale && (
+  <div>
+    <label className="block text-sm text-gray-600 font-bold mb-1">
+      Codice Fiscale<strong className="text-red-500">*</strong>
+    </label>
+    <input
+      type="text"
+      name="codiceFiscale"
+      placeholder="Inserisci il tuo codice fiscale"
+      required
+      value={registerData.codiceFiscale}
+      onChange={(e) =>
+        setRegisterData((prevState) => ({
+          ...prevState,
+          codiceFiscale: e.target.value,
+        }))
+      }
+      className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+    />
+  </div>
+)}
+
+
+          <div>
+  <label className="block text-sm text-gray-600 font-bold mb-1">
+    Firma<strong className="text-red-500">*</strong>
+  </label>
+  <div className="flex space-x-4">
+    <label className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="firma"
+        value="true"
+        checked={registerData.firma === true}
+        onChange={handleFirmaChange}
+        className="form-radio text-blue-600"
+      />
+      <span>Digitale</span>
+    </label>
+    <label className="flex items-center space-x-2">
+      <input
+        type="radio"
+        name="firma"
+        value="false"
+        checked={registerData.firma === false}
+        onChange={handleFirmaChange}
+        className="form-radio text-blue-600"
+      />
+      <span>Olografica</span>
+    </label>
+  </div>
+</div>
           
           <div>
             <label className="block text-sm text-gray-600 font-bold mb-1">
@@ -314,6 +378,7 @@ const Register = () => {
       Nickname 1</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="nickname1"
         value={registerData.nickname1}
         onChange={handleInputChange}
@@ -326,6 +391,7 @@ const Register = () => {
       Nickname 2</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="nickname2"
         value={registerData.nickname2}
         onChange={handleInputChange}
@@ -338,6 +404,7 @@ const Register = () => {
       Nickname 3</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="nickname3"
         value={registerData.nickname3}
         onChange={handleInputChange}
@@ -350,6 +417,7 @@ const Register = () => {
       Indirizzo Laboratorio</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="indirizzoLaboratorio"
         value={registerData.indirizzoLaboratorio}
         onChange={handleInputChange}
@@ -362,6 +430,7 @@ const Register = () => {
       Indirizzo Laboratorio 2</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="indirizzoLaboratorio2"
         value={registerData.indirizzoLaboratorio2}
         onChange={handleInputChange}
@@ -374,6 +443,7 @@ const Register = () => {
       Depositi</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="depositi"
         value={registerData.depositi}
         onChange={handleInputChange}
@@ -386,6 +456,7 @@ const Register = () => {
       Sito Web</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="sitoWeb"
         value={registerData.sitoWeb}
         onChange={handleInputChange}
@@ -431,6 +502,7 @@ const Register = () => {
       Sede 1</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="sede1"
         value={registerData.sede1}
         onChange={handleInputChange}
@@ -441,6 +513,7 @@ const Register = () => {
       Sede 2</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="sede2"
         value={registerData.sede2}
         onChange={handleInputChange}
@@ -452,6 +525,7 @@ const Register = () => {
       Responsabile Vendita 1</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="responsabile1"
         value={registerData.responsabile1}
         onChange={handleInputChange}
@@ -463,6 +537,7 @@ const Register = () => {
       Responsabile Vendita 2</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="responsabile2"
         value={registerData.responsabile2}
         onChange={handleInputChange}
@@ -474,6 +549,7 @@ const Register = () => {
       Sito Web</label>
       <input
         type="text"
+        placeholder="Inserisci..."
         name="sitoWeb"
         value={registerData.sitoWeb}
         onChange={handleInputChange}
@@ -484,40 +560,16 @@ const Register = () => {
     </div>
 
 )}
-{selectedOption === "Esperto" && (
-  <div>
-  <label className="block text-sm text-gray-600 font-bold mb-1">
-  Sito Web</label>
-  <input
-    type="text"
-    name="sitoWeb"
-    value={registerData.sitoWeb}
-    onChange={handleInputChange}
-    className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-    />
-</div>
-)}
-{selectedOption === "Mercante" && (
-  <div>
-  <label className="block text-sm text-gray-600 font-bold mb-1">
-  Sito Web</label>
-  <input
-    type="text"
-    name="sitoWeb"
-    value={registerData.sitoWeb}
-    onChange={handleInputChange}
-    className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-    />
-</div>
-)}
+
 {selectedOption === "Museo" && (
   <div>
   <label className="block text-sm text-gray-600 font-bold mb-1">
-  Sito Web</label>
+  Indirizzo </label>
   <input
     type="text"
-    name="sitoWeb"
-    value={registerData.sitoWeb}
+    placeholder="Inserisci..."
+    name="indirizzo"
+    value={registerData.indirizzo}
     onChange={handleInputChange}
     className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
     />
