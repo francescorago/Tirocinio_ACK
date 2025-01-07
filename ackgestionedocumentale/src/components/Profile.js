@@ -53,6 +53,10 @@ const Profile = () => {
             <p className="text-gray-500">Tipo Utente:</p>
             <p>{user ? user.informazioniUtente.ruolo : "Ruolo"}</p>
           </div>
+          <div>
+            <p className="text-gray-500">Nazione:</p>
+            <p>{user ? user.informazioniUtente.nazione : "Nazione"}</p>
+          </div>
         </div>
       </div>
     </div>

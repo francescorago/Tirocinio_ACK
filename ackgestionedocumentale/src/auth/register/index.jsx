@@ -325,7 +325,7 @@ const Register = () => {
             </label>
             <select
             id="options"
-                name="ruolo"
+                name="options"
                 value={ selectedOption}
                 
                 onChange={handleDropdownChange}
