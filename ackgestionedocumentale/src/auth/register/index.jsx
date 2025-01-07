@@ -302,6 +302,7 @@ const Register = () => {
       <input
         type="email"
         name="pec"
+        placeholder="Inserisci pec"
         value={registerData.pec}
         onChange={handleInputChange}
         className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
