@@ -43,11 +43,15 @@ const Profile = () => {
           </div>
           <div>
             <p className="text-gray-500">Indirizzo:</p>
-            <p>{user ? user.informazioniUtente.indirizzo : "Indirizzo"}</p>
+            <p>{user ? user.informazioniUtente.indirizzo : ""}</p>
           </div>
           <div>
             <p className="text-gray-500">Partita IVA:</p>
             <p>{user ? user.informazioniUtente.partitaIVA : "PartitaIVA"}</p>
+          </div>
+          <div>
+            <p className="text-gray-500">Tipo Utente:</p>
+            <p>{user ? user.informazioniUtente.ruolo : "Ruolo"}</p>
           </div>
         </div>
       </div>

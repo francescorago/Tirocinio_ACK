@@ -22,7 +22,7 @@ const Register = () => {
     codiceFiscale: "",
     partitaIVA: "",
     indirizzo:"",
-    attività:"",
+    ruolo:"",
     sede1:"",
     sede2:"",
     responsabile1:"",
@@ -325,8 +325,9 @@ const Register = () => {
             </label>
             <select
             id="options"
-                name="options"
-                value={selectedOption}
+                name="ruolo"
+                value={ selectedOption}
+                
                 onChange={handleDropdownChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
             >
@@ -337,7 +338,9 @@ const Register = () => {
                 <option value="Esperto">Esperto</option>
                 <option value="Mercante">Mercante</option>
                 <option value="Museo">Museo</option>
+              
             </select>
+           
           </div>
 
 
