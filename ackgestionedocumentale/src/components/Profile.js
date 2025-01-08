@@ -38,28 +38,74 @@ const Profile = () => {
             <p>{user ? user.email : "Email"}</p>
           </div>
           <div>
-            <p className="text-gray-500">Codice Fiscale:</p>
-            <p>{user ? user.informazioniUtente.codiceFiscale : "Codice Fiscale"}</p>
-          </div>
-          <div>
-            <p className="text-gray-500">Indirizzo:</p>
-            <p>{user ? user.informazioniUtente.indirizzo : ""}</p>
-          </div>
-          <div>
-            <p className="text-gray-500">Partita IVA:</p>
-            <p>{user ? user.informazioniUtente.partitaIVA : "PartitaIVA"}</p>
-          </div>
-          <div>
-            <p className="text-gray-500">Tipo Utente:</p>
-            <p>{user ? user.informazioniUtente.ruolo : "Ruolo"}</p>
-          </div>
-          <div>
-            <p className="text-gray-500">Nazione:</p>
-            <p>{user ? user.informazioniUtente.nazione : "Nazione"}</p>
-          </div>
+                <p className="text-gray-500">Codice Fiscale:</p>
+                <p>{user ? user.informazioniUtente.codiceFiscale : "Codice Fiscale"}</p>
+                </div>
+                    
+                    <div>
+                      <p className="text-gray-500">Indirizzo:</p>
+                      <p>{user ? user.informazioniUtente.indirizzo : "Indirizzo"}</p>
+                      </div>
+                    <div>
+                      <p className="text-gray-500">Firma:</p>
+                      <p>{user ? user.informazioniUtente.firma : "Firma"}</p>
+                      </div>
+
+                    <div>
+                      <p className="text-gray-500">Tipo Utente:</p>
+                      <p>{user ? user.informazioniUtente.tipoUtente : "Tipo Utente"}</p>
+
+                      </div>
+
+                    {/* Campi visibili solo per Artista */}
+                    {user && user.informazioniUtente.tipoUtente === "Artista" && (
+                        <>
+                        <div>
+                      <p className="text-gray-500">Partita IVA:</p>
+                      <p>{user ? user.informazioniUtente.partitaIVA : "Partita IVA"}</p>
+                      </div>
+                      
+                            <div>
+                              <p className="text-gray-500">PEC:</p>
+                              <p>{user.informazioniUtente.pec || "PEC"}</p>
+                              </div>
+                            <div>
+                              <p className="text-gray-500">Nickname 1:</p>
+                              <p>{user.informazioniUtente.nickname1 || "Nickname 1"}</p>
+                              
+                              </div>
+                            <div>
+                      <p className="text-gray-500">Indirizzo Laboratorio:</p>
+                      <p>{user.informazioniUtente.indirizzoLaboratorio || "Indirizzo Laboratorio"}</p>
+                      </div>
+                            <div>
+                              <p className="text-gray-500">Depositi:</p>
+                              <p>{user.informazioniUtente.depositi || "Depositi"}</p>
+                              </div>
+                            <div>
+                              <p className="text-gray-500">Sito Web:</p>
+                              <p>{user.informazioniUtente.sitoWeb || "Sito Web"}</p>
+                              </div>
+                            
+                        </>
+                    )}
+
+                    {/* Campi visibili solo per Galleria */}
+                    {user && user.informazioniUtente.tipoUtente === "Galleria" && (
+                        <>
+                            <div>
+                              <p className="text-gray-500">Sede 1:</p>
+                              <p>{user.informazioniUtente.sede1 || "Sede 1"}</p>
+                              </div>
+                            <div>
+                              <p className="text-gray-500">Responsabile Vendite 1:</p>
+                              <p>{user.informazioniUtente.responsabileVendite1 || "Responsabile Vendite 1"}</p>
+                              </div>
+                        </>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
     );
 };
 

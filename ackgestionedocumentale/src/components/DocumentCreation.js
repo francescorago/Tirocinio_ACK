@@ -604,6 +604,36 @@ const DocumentCreation = () => {
             </div>
 
             <div className="mb-4">
+              <label htmlFor="tipoDocumento" className="block text-sm font-medium text-gray-700">
+                <strong className="text-red-500">*</strong> Seleziona Tipologia di Documento:
+              </label>
+              <select
+                id="tipoDocumento"
+                name="tipoDocumento"
+                value={selectedOption}
+                onChange={handleDropdownChange}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              >
+                <option value="">-- Seleziona --</option>
+                {user && user.informazioniUtente.tipoUtente === "Proprietario Opere" && (
+                  <>
+                    <option value="contrattoCessione">Contratto di Cessione</option>
+                    <option value="contrattoAcquisto">Contratto di Acquisto</option>
+                    <option value="contrattoDeposito">Contratto di Deposito</option>
+                    <option value="contrattoEspositivo">Contratto Espositivo</option>
+                  </>
+                )}
+
+                {user &&
+                  (user.informazioniUtente.tipoUtente === "Artista" ||
+                    user.informazioniUtente.tipoUtente === "Galleria" ||
+                    user.informazioniUtente.tipoUtente === "Altro") && (
+                    <option value="certificatoOpera">Certificato Opera</option>
+                  )}
+              </select>
+            </div>
+            
+            <div className="mb-4">
               <label
                 htmlFor="codice"
                 className="block text-sm font-medium text-gray-700"

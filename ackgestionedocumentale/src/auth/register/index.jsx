@@ -22,11 +22,11 @@ const Register = () => {
     codiceFiscale: "",
     partitaIVA: "",
     indirizzo:"",
-    ruolo:"",
+    tipoUtente:"",
     sede1:"",
     sede2:"",
-    responsabile1:"",
-    responsabile2:"",
+    responsabileVendite1:"",
+    responsabileVendite2:"",
     firma:"",
   });
 
@@ -320,13 +320,11 @@ const Register = () => {
           
           {/* Campo Utente */}
           <div>
-            <label className="block text-sm text-gray-600 font-bold mb-1">
-              Utente<strong className="text-red-500">*</strong>
-            </label>
+            <label className="block text-sm text-gray-600 font-bold mb-1">Utente<strong className="text-red-500">*</strong></label>
             <select
-            id="options"
-                name="options"
-                value={ selectedOption}
+            
+                name="Utente"
+                value={ registerData.tipoUtente}
                 
                 onChange={handleDropdownChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
@@ -344,7 +342,7 @@ const Register = () => {
           </div>
 
 
-  {selectedOption === "Artista" && (
+  {registerData.tipoUtente === "Artista" && (
   <div className="space-y-4 border-t pt-4 mt-4">
     <h4 className="text-lg font-bold">Dati aggiuntivi - Artista</h4>
 
@@ -499,7 +497,7 @@ const Register = () => {
 
   </div>
 )}
-{selectedOption === "Galleria" && (
+{registerData.tipoUtente === "Galleria" && (
     <div>
       <label className="block text-sm text-gray-600 font-bold mb-1">
       Sede 1</label>
@@ -529,8 +527,8 @@ const Register = () => {
       <input
         type="text"
         placeholder="Inserisci..."
-        name="responsabile1"
-        value={registerData.responsabile1}
+        name="responsabileVendita1"
+        value={registerData.responsabileVendite1}
         onChange={handleInputChange}
         className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
         />
@@ -542,7 +540,7 @@ const Register = () => {
         type="text"
         placeholder="Inserisci..."
         name="responsabile2"
-        value={registerData.responsabile2}
+        value={registerData.responsabileVendite2}
         onChange={handleInputChange}
         className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
         />
@@ -564,7 +562,7 @@ const Register = () => {
 
 )}
 
-{selectedOption === "Museo" && (
+{registerData.tipoUtente === "Museo" && (
   <div>
   <label className="block text-sm text-gray-600 font-bold mb-1">
   Indirizzo </label>
