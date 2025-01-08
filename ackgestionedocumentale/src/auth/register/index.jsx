@@ -28,6 +28,7 @@ const Register = () => {
     responsabileVendite1:"",
     responsabileVendite2:"",
     firma:"",
+    fatturazioneElettronica:"",
   });
 
   const handleNazioneChange = (e) => {
@@ -318,265 +319,220 @@ const Register = () => {
             />
           </div>
           
-          {/* Campo Utente */}
-          <div>
-            <label className="block text-sm text-gray-600 font-bold mb-1">Utente<strong className="text-red-500">*</strong></label>
+         {/* Tipo di Utente */}
+         <div>
+            <label className="block text-sm text-gray-600 font-bold mb-1">Tipo di Utente<strong className="text-red-500">*</strong></label>
             <select
-            
-                name="Utente"
-                value={ registerData.tipoUtente}
-                
-                onChange={handleDropdownChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              name="tipoUtente"
+              required
+              value={registerData.tipoUtente}
+              onChange={handleChange}
+              className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
             >
-              <option value="">-- Scegli Utente --</option>
-                <option value="Artista">Artista</option>
-                <option value="Proprietario">Proprietario Opere</option>
-                <option value="Galleria">Galleria </option>
-                <option value="Esperto">Esperto</option>
-                <option value="Mercante">Mercante</option>
-                <option value="Museo">Museo</option>
-              
+              <option value="">Seleziona un tipo di utente</option>
+              <option value="Artista">Artista</option>
+              <option value="Proprietario Opere">Proprietario Opere</option>
+              <option value="Galleria">Galleria</option>
+              <option value="Esperto">Esperto</option>
+              <option value="Mercante">Mercante</option>
+              <option value="Musei">Musei</option>
             </select>
-           
           </div>
 
+          {/* Campi aggiuntivi per Artista */}
+          {registerData.tipoUtente === "Artista" && (
+            <>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Partita IVA<strong className="text-red-500">*</strong></label>
+                <input
+                  type="text"
+                  name="partitaIVA"
+                  placeholder="Inserisci la tua partita IVA"
+                  required
+                  value={registerData.partitaIVA}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-  {registerData.tipoUtente === "Artista" && (
-  <div className="space-y-4 border-t pt-4 mt-4">
-    <h4 className="text-lg font-bold">Dati aggiuntivi - Artista</h4>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">PEC<strong className="text-red-500">*</strong></label>
+                <input
+                  type="email"
+                  name="pec"
+                  placeholder="Inserisci la tua PEC"
+                  required
+                  value={registerData.pec}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-              Partita IVA<strong className="text-red-500">*</strong>
-            </label>
-      <input
-        type="text"
-        name="partitaIVA"
-        placeholder="Inserisci Partita IVA"
-        value={registerData.partitaIVA}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Nickname 1</label>
+                <input
+                  type="text"
+                  name="nickname1"
+                  placeholder="Inserisci il tuo primo nickname"
+                  value={registerData.nickname1}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-              PEC<strong className="text-red-500">*</strong>
-            </label>
-      <input
-        type="email"
-        name="pec"
-        placeholder="Inserisci pec"
-        value={registerData.pec}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Nickname 2</label>
+                <input
+                  type="text"
+                  name="nickname2"
+                  placeholder="Inserisci il tuo secondo nickname"
+                  value={registerData.nickname2}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Nickname 1</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="nickname1"
-        value={registerData.nickname1}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Nickname 3</label>
+                <input
+                  type="text"
+                  name="nickname3"
+                  placeholder="Inserisci il tuo terzo nickname"
+                  value={registerData.nickname3}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Nickname 2</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="nickname2"
-        value={registerData.nickname2}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Indirizzo Laboratorio</label>
+                <input
+                  type="text"
+                  name="indirizzoLaboratorio"
+                  placeholder="Inserisci l'indirizzo del laboratorio"
+                  value={registerData.indirizzoLaboratorio}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Nickname 3</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="nickname3"
-        value={registerData.nickname3}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Indirizzo Laboratorio 2</label>
+                <input
+                  type="text"
+                  name="indirizzoLaboratorio2"
+                  placeholder="Inserisci un secondo indirizzo del laboratorio"
+                  value={registerData.indirizzoLaboratorio2}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Indirizzo Laboratorio</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="indirizzoLaboratorio"
-        value={registerData.indirizzoLaboratorio}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Depositi</label>
+                <input
+                  type="text"
+                  name="depositi"
+                  placeholder="Inserisci i depositi"
+                  value={registerData.depositi}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Indirizzo Laboratorio 2</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="indirizzoLaboratorio2"
-        value={registerData.indirizzoLaboratorio2}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Sito Web</label>
+                <input
+                  type="url"
+                  name="sitoWeb"
+                  placeholder="Inserisci il tuo sito web"
+                  value={registerData.sitoWeb}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Depositi</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="depositi"
-        value={registerData.depositi}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
 
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Sito Web</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="sitoWeb"
-        value={registerData.sitoWeb}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Fatturazione Elettronica</label>
+                <select
+                  name="fatturazioneElettronica"
+                  required
+                  value={registerData.fatturazioneElettronica}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                >
+                  <option value="si">Sì</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </>
+          )}
 
-    <div>
-  <label className="block text-sm text-gray-600 font-bold mb-1">
-    Fatturazione Elettronica<strong className="text-red-500">*</strong>
-  </label>
-  <div className="flex space-x-4">
-    <label className="flex items-center space-x-2">
-      <input
-        type="radio"
-        name="fatturazione"
-        value="true"
-        checked={registerData.fatturazione === true}
-        onChange={handleFatturazioneChange}
-        className="form-radio text-blue-600"
-      />
-      <span>Sì</span>
-    </label>
-    <label className="flex items-center space-x-2">
-      <input
-        type="radio"
-        name="fatturazione"
-        value="false"
-        checked={registerData.fatturazione === false}
-        onChange={handleFatturazioneChange}
-        className="form-radio text-blue-600"
-      />
-      <span>No</span>
-    </label>
-  </div>
-</div>
+          {/* Campi aggiuntivi per Galleria */}
+          {registerData.tipoUtente === "Galleria" && (
+            <>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Sede 1</label>
+                <input
+                  type="text"
+                  name="sede1"
+                  placeholder="Inserisci la prima sede"
+                  value={registerData.sede1}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-  </div>
-)}
-{registerData.tipoUtente === "Galleria" && (
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Sede 1</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="sede1"
-        value={registerData.sede1}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-            <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Sede 2</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="sede2"
-        value={registerData.sede2}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Responsabile Vendita 1</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="responsabileVendita1"
-        value={registerData.responsabileVendite1}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Responsabile Vendita 2</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="responsabile2"
-        value={registerData.responsabileVendite2}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
-    <div>
-      <label className="block text-sm text-gray-600 font-bold mb-1">
-      Sito Web</label>
-      <input
-        type="text"
-        placeholder="Inserisci..."
-        name="sitoWeb"
-        value={registerData.sitoWeb}
-        onChange={handleInputChange}
-        className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-        />
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Sede 2</label>
+                <input
+                  type="text"
+                  name="sede2"
+                  placeholder="Inserisci la seconda sede"
+                  value={registerData.sede2}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-    </div>
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Responsabile Vendite 1</label>
+                <input
+                  type="text"
+                  name="responsabileVendite1"
+                  placeholder="Inserisci il primo responsabile vendite"
+                  value={registerData.responsabileVendite1}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-)}
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Responsabile Vendite 2</label>
+                <input
+                  type="text"
+                  name="responsabileVendite2"
+                  placeholder="Inserisci il secondo responsabile vendite"
+                  value={registerData.responsabileVendite2}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
 
-{registerData.tipoUtente === "Museo" && (
-  <div>
-  <label className="block text-sm text-gray-600 font-bold mb-1">
-  Indirizzo </label>
-  <input
-    type="text"
-    placeholder="Inserisci..."
-    name="indirizzo"
-    value={registerData.indirizzo}
-    onChange={handleInputChange}
-    className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
-    />
-</div>
-)}
-
+              <div>
+                <label className="block text-sm text-gray-600 font-bold mb-1">Sito Web</label>
+                <input
+                  type="url"
+                  name="sitoWeb"
+                  placeholder="Inserisci il sito web della galleria"
+                  value={registerData.sitoWeb}
+                  onChange={handleChange}
+                  className="w-full mt-1 px-3 py-2 text-gray-700 bg-white border rounded-lg focus:border-blue-600 shadow-sm transition duration-300"
+                />
+              </div>
+            </>
+          )}
 
 
           {/* Campo Email */}
