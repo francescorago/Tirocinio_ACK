@@ -38,6 +38,8 @@ const DocumentCreation = () => {
 
   const [selectedOption, setSelectedOption] = useState("");
 
+const [selectedTipoDocumento, setSelectedTipoDocumento] = useState('');
+
   const [isChecked, setIsChecked] = useState(false);
 
   const navigate = useNavigate();
@@ -86,7 +88,9 @@ const DocumentCreation = () => {
   const handleDropdownChange = (e) => {
     setSelectedOption(e.target.value); // Set the selected value
   };
-
+  const handleTipoDocumentoChange = (event) => {
+    setSelectedTipoDocumento(event.target.value);
+  };
   const handleHome = async (e) => {
     e.preventDefault(); // Previeni il refresh della pagina
 
@@ -610,8 +614,8 @@ const DocumentCreation = () => {
               <select
                 id="tipoDocumento"
                 name="tipoDocumento"
-                value={selectedOption}
-                onChange={handleDropdownChange}
+                value={selectedTipoDocumento}
+                onChange={handleTipoDocumentoChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
               >
                 <option value="">-- Seleziona --</option>

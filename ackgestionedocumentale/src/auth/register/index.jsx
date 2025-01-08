@@ -27,7 +27,7 @@ const Register = () => {
     sede2:"",
     responsabileVendite1:"",
     responsabileVendite2:"",
-    firma:"",
+    tipoFirma:"",
     fatturazioneElettronica:"",
   });
 
@@ -275,33 +275,36 @@ const Register = () => {
 
 
           <div>
-  <label className="block text-sm text-gray-600 font-bold mb-1">
-    Firma<strong className="text-red-500">*</strong>
-  </label>
-  <div className="flex space-x-4">
-    <label className="flex items-center space-x-2">
-      <input
-        type="radio"
-        name="firma"
-        value="true"
-        checked={registerData.firma === true}
-        onChange={handleFirmaChange}
-        className="form-radio text-blue-600"
-      />
-      <span>Digitale</span>
-    </label>
-    <label className="flex items-center space-x-2">
-      <input
-        type="radio"
-        name="firma"
-        value="false"
-        checked={registerData.firma === false}
-        onChange={handleFirmaChange}
-        className="form-radio text-blue-600"
-      />
-      <span>Olografica</span>
-    </label>
-  </div>
+ {/* Tipo di Firma */}
+ <div>
+            <label className="block text-sm text-gray-600 font-bold mb-1">Tipo di Firma<strong className="text-red-500">*</strong></label>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="firmaOlografica"
+                  name="tipoFirma"
+                  value="Olografica"
+                  checked={registerData.tipoFirma === "Olografica"}
+                  onChange={handleChange}
+                  className="mr-2"
+                />
+                <label htmlFor="firmaOlografica" className="text-sm text-gray-600">Firma Olografica</label>
+              </div>
+              <div className="flex items-center">
+                <input
+                  type="radio"
+                  id="firmaDigitale"
+                  name="tipoFirma"
+                  value="Digitale"
+                  checked={registerData.tipoFirma === "Digitale"}
+                  onChange={handleChange}
+                  className="mr-2"
+                />
+                <label htmlFor="firmaDigitale" className="text-sm text-gray-600">Firma Digitale</label>
+              </div>
+            </div>
+          </div>
 </div>
           
           <div>
