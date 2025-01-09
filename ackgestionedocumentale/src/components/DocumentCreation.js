@@ -1,4 +1,4 @@
-import React, { useState, version } from "react";
+import React, { useState, version, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../userContext/UserContext"; // Importa useUser
 import Swal from "sweetalert2"; // Importa SweetAlert2
@@ -8,6 +8,9 @@ import { jsPDF } from "jspdf";
 import "../style.css";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getDocs, query, where } from "firebase/firestore";
+import SignatureCanvas from "react-signature-canvas";
+
+
 
 const DocumentCreation = () => {
   const user = useUser();
@@ -22,6 +25,8 @@ const DocumentCreation = () => {
   const [photos, setPhotos] = useState([]);
   const [previews, setPreviews] = useState([]);
   const [text, setText] = useState("");
+  const [signature, setSignature] = useState(null); // Per salvare l'immagine della firma
+  const sigCanvasRef = useRef(); // Riferimento al canvas per gestire la firma
   const [formData, setFormData] = useState({
     titolo: "",
     altezza: "",
@@ -492,6 +497,11 @@ const renderSpecificFields = () => {
       );
       return; // Blocca il salvataggio se il codice esiste già
     }
+    if (user?.informazioniUtente?.firma === "olografica" && !signature) {
+      Swal.fire("Errore", "Devi salvare la firma olografica prima di continuare.", "error");
+      return;
+    }
+    
 
     if (!isChecked) {
       Swal.fire(
@@ -697,7 +707,26 @@ const renderSpecificFields = () => {
 
     doc.text("Firma Digitale: __________________", signatureX, signatureY, {
       align: "right",
-    });
+    }
+  );
+  if (user?.informazioniUtente?.firma === "olografica" && signature) {
+    const imgWidth = 50; // Larghezza ridotta del 50%
+    const imgHeight = 25; // Altezza ridotta del 50%
+    const pageWidth = doc.internal.pageSize.width;
+    const margin = 5;
+  
+    // Coordinate per la firma
+    const signatureY = doc.internal.pageSize.height - imgHeight - margin - 5; // Sposta sopra i trattini
+    const signatureX = pageWidth - imgWidth - margin; // Allinea a destra come i trattini
+  
+    // Aggiungi la firma
+    doc.addImage(signature, "PNG", signatureX, signatureY, imgWidth, imgHeight);
+  
+    
+  }
+  
+  
+  
 
     // Aggiorna il codice progressivo
     codiceProgressivo++;
@@ -1184,6 +1213,41 @@ const renderSpecificFields = () => {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
               />
             </div>
+            {user?.informazioniUtente?.firma === "olografica" && (
+  <div className="mb-4">
+    <label className="block text-sm font-medium text-gray-700">
+      Firma Olografica (Usa il Trackpad):
+    </label>
+    <SignatureCanvas
+      ref={sigCanvasRef}
+      penColor="black"
+      canvasProps={{
+        width: 300,
+        height: 150,
+        className: "border border-gray-300 rounded",
+      }}
+    />
+    <div className="mt-2">
+      <button
+        type="button"
+        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        onClick={() => sigCanvasRef.current.clear()}
+      >
+        Cancella
+      </button>
+      <button
+        type="button"
+        className="ml-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        onClick={() =>
+          setSignature(sigCanvasRef.current.getTrimmedCanvas().toDataURL("image/png"))
+        }
+      >
+        Salva Firma
+      </button>
+    </div>
+  </div>
+)}
+
             <div className="mb-4">
               <p className="mb-2">
                 Io sottoscritto{" "}
