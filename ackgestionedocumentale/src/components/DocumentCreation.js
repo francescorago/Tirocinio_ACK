@@ -916,7 +916,9 @@ const renderSpecificFields = () => {
     {user &&
       (user.informazioniUtente.tipoUtente === "Artista" ||
         user.informazioniUtente.tipoUtente === "Galleria" ||
-        user.informazioniUtente.tipoUtente === "Altro") && (
+        user.informazioniUtente.tipoUtente === "Museo" ||
+        user.informazioniUtente.tipoUtente === "Mercante" ||
+        user.informazioniUtente.tipoUtente === "Esperto") && (
         <option value="certificatoOpera">Certificato Opera</option>
       )}
   </select>
