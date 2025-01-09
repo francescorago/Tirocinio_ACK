@@ -44,6 +44,229 @@ const DocumentCreation = () => {
   const [selectedOption, setSelectedOption] = useState("");
 
 const [selectedTipoDocumento, setSelectedTipoDocumento] = useState('');
+const renderSpecificFields = () => {
+  switch (selectedTipoDocumento) {
+    case "contrattoCessione":
+      return (
+        <>
+          <div className="mb-4">
+            <label htmlFor="nomeCessionario" className="block text-sm font-medium text-gray-700">
+              Nome Cessionario:
+            </label>
+            <input
+              type="text"
+              name="nomeCessionario"
+              id="nomeCessionario"
+              value={formData.nomeCessionario || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="cognomeCessionario" className="block text-sm font-medium text-gray-700">
+              Cognome Cessionario:
+            </label>
+            <input
+              type="text"
+              name="cognomeCessionario"
+              id="cognomeCessionario"
+              value={formData.cognomeCessionario || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="dataCessione" className="block text-sm font-medium text-gray-700">
+              Data di Cessione:
+            </label>
+            <input
+              type="date"
+              name="dataCessione"
+              id="dataCessione"
+              value={formData.dataCessione || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="importoCessione" className="block text-sm font-medium text-gray-700">
+              Importo Cessione:
+            </label>
+            <input
+              type="number"
+              name="importoCessione"
+              id="importoCessione"
+              value={formData.importoCessione || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+        </>
+      );
+    case "contrattoAcquisto":
+      return (
+        <>
+          <div className="mb-4">
+            <label htmlFor="nomeAcquirente" className="block text-sm font-medium text-gray-700">
+              Nome Acquirente:
+            </label>
+            <input
+              type="text"
+              name="nomeAcquirente"
+              id="nomeAcquirente"
+              value={formData.nomeAcquirente || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="cognomeAcquirente" className="block text-sm font-medium text-gray-700">
+              Cognome Acquirente:
+            </label>
+            <input
+              type="text"
+              name="cognomeAcquirente"
+              id="cognomeAcquirente"
+              value={formData.cognomeAcquirente || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="dataAcquisto" className="block text-sm font-medium text-gray-700">
+              Data di Acquisto:
+            </label>
+            <input
+              type="date"
+              name="dataAcquisto"
+              id="dataAcquisto"
+              value={formData.dataAcquisto || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="prezzoAcquisto" className="block text-sm font-medium text-gray-700">
+              Prezzo Acquisto:
+            </label>
+            <input
+              type="number"
+              name="prezzoAcquisto"
+              id="prezzoAcquisto"
+              value={formData.prezzoAcquisto || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+        </>
+      );
+      case "contrattoDeposito":
+      return (
+        <>
+          <div className="mb-4">
+            <label htmlFor="nomeDepositatario" className="block text-sm font-medium text-gray-700">
+              Nome Depositatario:
+            </label>
+            <input
+              type="text"
+              name="nomeDepositatario"
+              id="nomeDepositatario"
+              value={formData.nomeDepositatario || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="cognomeDepositatario" className="block text-sm font-medium text-gray-700">
+              Cognome Depositatario:
+            </label>
+            <input
+              type="text"
+              name="cognomeDepositatario"
+              id="cognomeDepositatario"
+              value={formData.cognomeDepositatario || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="durataDeposito" className="block text-sm font-medium text-gray-700">
+              Durata Deposito:
+            </label>
+            <input
+              type="text"
+              name="durataDeposito"
+              id="durataDeposito"
+              value={formData.durataDeposito || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+        </>
+      );
+    case "contrattoEspositivo":
+      return (
+        <>
+          <div className="mb-4">
+            <label htmlFor="nomeResponsabileEsposizione" className="block text-sm font-medium text-gray-700">
+              Nome Responsabile Esposizione:
+            </label>
+            <input
+              type="text"
+              name="nomeResponsabileEsposizione"
+              id="nomeResponsabileEsposizione"
+              value={formData.nomeResponsabileEsposizione || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="cognomeResponsabileEsposizione" className="block text-sm font-medium text-gray-700">
+              Cognome Responsabile Esposizione:
+            </label>
+            <input
+              type="text"
+              name="cognomeResponsabileEsposizione"
+              id="cognomeResponsabileEsposizione"
+              value={formData.cognomeResponsabileEsposizione || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="luogoEsposizione" className="block text-sm font-medium text-gray-700">
+              Luogo Esposizione:
+            </label>
+            <input
+              type="text"
+              name="luogoEsposizione"
+              id="luogoEsposizione"
+              value={formData.luogoEsposizione || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="durataEsposizione" className="block text-sm font-medium text-gray-700">
+              Durata Esposizione:
+            </label>
+            <input
+              type="text"
+              name="durataEsposizione"
+              id="durataEsposizione"
+              value={formData.durataEsposizione || ""}
+              onChange={handleInputChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+        </>
+      );
+    default:
+      return null;
+  }
+};
+
+
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -311,10 +534,7 @@ const [selectedTipoDocumento, setSelectedTipoDocumento] = useState('');
 
     let yPosition = 30; // Iniziamo il testo successivo un po' più in basso per evitare sovrapposizioni
 
-    // Aggiungi frase iniziale
-    doc.text("Io sottoscritto:", 10, yPosition);
-    yPosition += 10;
-
+    
     // Funzione per caricare le immagini
     const loadImages = photos.map((photo) => {
       return new Promise((resolve, reject) => {
@@ -359,16 +579,21 @@ const [selectedTipoDocumento, setSelectedTipoDocumento] = useState('');
 
     lastImgYPosition += Math.ceil(base64Images.length / 3) * (imgHeight + 10);
     yPosition = lastImgYPosition;
+    
+    // Aggiungi frase iniziale
+    doc.text("Io sottoscritto:", 10, yPosition);
+    yPosition += 10;
+
 
     // Aggiungi i dati dell'artista e della descrizione
     doc.text(
-      `Nome Autore: ${user ? user.informazioniUtente.nome : "Nome"}`,
+      `Nome : ${user ? user.informazioniUtente.nome : "Nome"}`,
       10,
       yPosition
     );
     yPosition += 10;
     doc.text(
-      `Cognome Autore: ${user ? user.informazioniUtente.cognome : "Cognome"}`,
+      `Cognome : ${user ? user.informazioniUtente.cognome : "Cognome"}`,
       10,
       yPosition
     );
@@ -384,6 +609,67 @@ const [selectedTipoDocumento, setSelectedTipoDocumento] = useState('');
     doc.text(`Larghezza: ${formData.larghezza} cm`, 10, yPosition);
     yPosition += 10;
 
+
+     // Campi dinamici basati sulla tipologia di documento
+  if (selectedTipoDocumento === "contrattoCessione") {
+    doc.text(`Nome Cessionario: ${formData.nomeCessionario || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Cognome Cessionario: ${formData.cognomeCessionario || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Data di Cessione: ${formData.dataCessione || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Importo Cessione: ${formData.importoCessione || ""}`, 10, yPosition);
+    yPosition += 10;
+  } else if (selectedTipoDocumento === "contrattoAcquisto") {
+    doc.text(`Nome Acquirente: ${formData.nomeAcquirente || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Cognome Acquirente: ${formData.cognomeAcquirente || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Data di Acquisto: ${formData.dataAcquisto || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Prezzo Acquisto: ${formData.prezzoAcquisto || ""}`, 10, yPosition);
+    yPosition += 10;
+  }
+  else if (selectedTipoDocumento === "contrattoEspositivo") {
+    doc.text(`Nome Responsabile Esposizione: ${formData.nomeResponsabileEsposizione || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Cognome Responsabile Esposizione: ${formData.cognomeResponsabileEsposizione || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Durata Esposizione: ${formData.durataEsposizione || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Luogo Esposizione: ${formData.luogoEsposizione || ""}`, 10, yPosition);
+    yPosition += 10;
+  }
+  else if (selectedTipoDocumento === "contrattoDeposito") {
+    doc.text(`Nome Depositario: ${formData.nomeDepositatario || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Cognome Depositario: ${formData.cognomeDepositatario || ""}`, 10, yPosition);
+    yPosition += 10;
+    doc.text(`Durata Deposito : ${formData.durataDeposito || ""}`, 10, yPosition);
+    yPosition += 10;
+    
+  }
+
+ // Modalità di formazione
+ let formazioneText = "Modalità di Formazione: ";
+ switch (selectedOption) {
+   case "option1":
+     formazioneText += "Creazione diretta";
+     break;
+   case "option2":
+     formazioneText += "Acquisizione analogica";
+     break;
+   case "option3":
+     formazioneText += "Memorizzazione digitale";
+     break;
+   case "option4":
+     formazioneText += "Generazione Automatica";
+     break;
+   default:
+     formazioneText += "Non specificata";
+ }
+ doc.text(formazioneText, 10, yPosition);
+ yPosition += 10;
     if (selectedOption === "option2") {
       doc.text(`Profondità: ${formData.profondità} cm`, 10, yPosition);
       yPosition += 10;
@@ -637,34 +923,36 @@ const [selectedTipoDocumento, setSelectedTipoDocumento] = useState('');
             </div>
 
             <div className="mb-4">
-              <label htmlFor="tipoDocumento" className="block text-sm font-medium text-gray-700">
-                <strong className="text-red-500">*</strong> Seleziona Tipologia di Documento:
-              </label>
-              <select
-                id="tipoDocumento"
-                name="tipoDocumento"
-                value={selectedTipoDocumento}
-                onChange={handleTipoDocumentoChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded"
-              >
-                <option value="">-- Seleziona --</option>
-                {user && user.informazioniUtente.tipoUtente === "Proprietario Opere" && (
-                  <>
-                    <option value="contrattoCessione">Contratto di Cessione</option>
-                    <option value="contrattoAcquisto">Contratto di Acquisto</option>
-                    <option value="contrattoDeposito">Contratto di Deposito</option>
-                    <option value="contrattoEspositivo">Contratto Espositivo</option>
-                  </>
-                )}
+  <label htmlFor="tipoDocumento" className="block text-sm font-medium text-gray-700">
+    <strong className="text-red-500">*</strong> Seleziona Tipologia di Documento:
+  </label>
+  <select
+    id="tipoDocumento"
+    name="tipoDocumento"
+    value={selectedTipoDocumento}
+    onChange={handleTipoDocumentoChange}
+    className="mt-1 block w-full p-2 border border-gray-300 rounded"
+  >
+    <option value="">-- Seleziona --</option>
+    {user && user.informazioniUtente.tipoUtente === "Proprietario Opere" && (
+      <>
+        <option value="contrattoCessione">Contratto di Cessione</option>
+        <option value="contrattoAcquisto">Contratto di Acquisto</option>
+        <option value="contrattoDeposito">Contratto di Deposito</option>
+        <option value="contrattoEspositivo">Contratto Espositivo</option>
+      </>
+    )}
+    {user &&
+      (user.informazioniUtente.tipoUtente === "Artista" ||
+        user.informazioniUtente.tipoUtente === "Galleria" ||
+        user.informazioniUtente.tipoUtente === "Altro") && (
+        <option value="certificatoOpera">Certificato Opera</option>
+      )}
+  </select>
+</div>
 
-                {user &&
-                  (user.informazioniUtente.tipoUtente === "Artista" ||
-                    user.informazioniUtente.tipoUtente === "Galleria" ||
-                    user.informazioniUtente.tipoUtente === "Altro") && (
-                    <option value="certificatoOpera">Certificato Opera</option>
-                  )}
-              </select>
-            </div>
+{/* Render specific fields based on selectedTipoDocumento */}
+{renderSpecificFields()}
             
             <div className="mb-4">
               <label
@@ -704,6 +992,25 @@ const [selectedTipoDocumento, setSelectedTipoDocumento] = useState('');
                 className="mt-1 block w-full p-2 border border-gray-300 rounded"
                 placeholder="Inserisci il titolo dell'opera"
               />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="options"
+                className="block text-sm font-medium text-gray-700"
+              >
+                <strong className="text-red-500">*</strong>Seleziona un'opzione:
+              </label>
+              <select
+                id="options"
+                name="options"
+                value={selectedOption}
+                onChange={handleDropdownChange}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded"
+              >
+                <option value="">-- Seleziona --</option>
+                <option value="option1">Dipinto</option>
+                <option value="option2">Scultura</option>
+              </select>
             </div>
 
             <div className="mb-4">
