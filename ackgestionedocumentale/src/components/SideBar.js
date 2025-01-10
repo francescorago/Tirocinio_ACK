@@ -72,6 +72,17 @@ const Sidebar = () => {
               </Link>
             </li>
             <li
+            className={`px-4 py-2 flex items-center ${
+              isActive("/gallery") ? "bg-gray-700 text-white" : "hover:bg-gray-700"
+            }`}
+            >
+               <FaHome className="mr-2" />
+               <Link to="/gallery" className="flex-1 py-3">
+               Galleria
+               </Link>
+            </li>
+
+            <li
               className={`px-4 py-2 flex items-center ${
                 isActive("/profile") ? "bg-gray-700 text-white" : "hover:bg-gray-700"
               }`}

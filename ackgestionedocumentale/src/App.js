@@ -19,6 +19,7 @@ import LoadDocument from "./components/LoadDocument";
 import { useUser } from "../src/userContext/UserContext";
 import { FaUser } from "react-icons/fa";
 import AdminArchive from "./components/AdminArchive";
+import Gallery from "./components/Gallery";
 
 function App() {
   const location = useLocation(); // Usa useLocation per ottenere il percorso corrente
@@ -68,6 +69,9 @@ function App() {
     {
       path: "/reset",
       element: <ResetPassword />,
+    },
+    { path: "/gallery",
+      element: <Gallery/>
     },
     {
       path: "/archive",
