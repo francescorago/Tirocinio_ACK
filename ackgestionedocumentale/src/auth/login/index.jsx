@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import successAnimation from "../../assets/animationDocument.json";
@@ -41,6 +41,9 @@ const Login = () => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [animationFinished, setAnimationFinished] = useState(false);
   const [isEmailRegistered, setIsEmailRegistered] = useState(true);
+  
+  const [failedAttempts, setFailedAttempts] = useState(0); // Track failed attempts
+  const [blockUntil, setBlockUntil] = useState(null); // Track when to unblock the user
 
   const db = getFirestore();
   const auth = getAuth();
@@ -59,6 +62,13 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    // If blocked, don't proceed
+    if (blockUntil && Date.now() < blockUntil) {
+      setErrorMessage("Hai raggiunto il limite di tentativi. Riprova tra 10 minuti.");
+      return;
+    }
+
     if (!isSigningIn) {
       setIsSigningIn(true);
       setShowAnimation(false);
@@ -71,10 +81,17 @@ const Login = () => {
         }, 3000);
       } catch (error) {
         console.error("Errore:", error);
-        setErrorMessage(
-          errorMessages[AuthErrorCodes.INVALID_EMAIL] ||
+        setFailedAttempts(prev => prev + 1); // Increment failed attempts
+
+        if (failedAttempts + 1 >= 3) {
+          setBlockUntil(Date.now() + 10 * 60 * 1000); // Block for 10 minutes
+          setErrorMessage("Hai raggiunto il limite di tentativi. Riprova tra 10 minuti.");
+        } else {
+          setErrorMessage(
+            errorMessages[AuthErrorCodes.INVALID_EMAIL] ||
             "Errore sconosciuto. Per favore, riprova."
-        );
+          );
+        }
         setIsSigningIn(false);
       }
     }
@@ -82,6 +99,13 @@ const Login = () => {
 
   const onGoogleSignIn = async (e) => {
     e.preventDefault();
+
+    // If blocked, don't proceed
+    if (blockUntil && Date.now() < blockUntil) {
+      setErrorMessage("Hai raggiunto il limite di tentativi. Riprova tra 10 minuti.");
+      return;
+    }
+
     if (!isSigningIn) {
       setIsSigningIn(true);
       setShowAnimation(false);
@@ -107,12 +131,20 @@ const Login = () => {
         console.error("Errore:", error);
         setErrorMessage(
           errorMessages[AuthErrorCodes.INVALID_EMAIL] ||
-            "Errore sconosciuto. Per favore, riprova."
+          "Errore sconosciuto. Per favore, riprova."
         );
         setIsSigningIn(false);
       }
     }
   };
+
+  useEffect(() => {
+    // Reset failed attempts if more than 10 minutes have passed
+    if (blockUntil && Date.now() > blockUntil) {
+      setFailedAttempts(0);
+      setBlockUntil(null);
+    }
+  }, [blockUntil]);
 
   if (animationFinished) {
     return <Navigate to={"/home"} replace={true} />;
@@ -131,7 +163,6 @@ const Login = () => {
             />
           </div>
         )}
-        {/* Centriamo il logo*/}
         <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border border-blue-600 rounded-xl">
           <div className="flex flex-col items-center justify-center mb-4">
             <div className="w-60 h-15  rounded-full flex items-center justify-center border border-blue-600 mb-4">
@@ -173,7 +204,7 @@ const Login = () => {
             )}
             <button
               type="submit"
-              disabled={isSigningIn}
+              disabled={isSigningIn || (blockUntil && Date.now() < blockUntil)}
               className={`w-full px-4 py-2 text-white font-medium rounded-lg ${
                 isSigningIn
                   ? "bg-gray-300 cursor-not-allowed"
