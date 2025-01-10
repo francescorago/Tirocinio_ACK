@@ -71,16 +71,7 @@ const Sidebar = () => {
                 Carica documenti firmati
               </Link>
             </li>
-            <li
-            className={`px-4 py-2 flex items-center ${
-              isActive("/warehouse") ? "bg-gray-700 text-white" : "hover:bg-gray-700"
-            }`}
-            >
-               <FaWarehouse className="mr-2" />
-               <Link to="/warehouse" className="flex-1 py-3">
-               Magazzino
-               </Link>
-            </li>
+            
 
             <li
             className={`px-4 py-2 flex items-center ${
