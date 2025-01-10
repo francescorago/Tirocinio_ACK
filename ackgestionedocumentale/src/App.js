@@ -21,6 +21,7 @@ import { FaUser } from "react-icons/fa";
 import AdminArchive from "./components/AdminArchive";
 import Gallery from "./components/Gallery";
 
+
 function App() {
   const location = useLocation(); // Usa useLocation per ottenere il percorso corrente
   const user = useUser();
@@ -49,6 +50,10 @@ function App() {
     {
       path: "/document-archive",
       element: <DocumentArchive />,
+    },
+    {
+      path: "/warehouse",
+      elemente: <warehouse/>,
     },
     {
       path: "/edit-document/:id",

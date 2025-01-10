@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaHome, FaFileAlt, FaUser, FaPlus, FaBars } from "react-icons/fa";
+import { FaHome, FaFileAlt, FaUser, FaPlus, FaBars, FaImage, FaWarehouse } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
@@ -73,10 +73,21 @@ const Sidebar = () => {
             </li>
             <li
             className={`px-4 py-2 flex items-center ${
+              isActive("/warehouse") ? "bg-gray-700 text-white" : "hover:bg-gray-700"
+            }`}
+            >
+               <FaWarehouse className="mr-2" />
+               <Link to="/warehouse" className="flex-1 py-3">
+               Magazzino
+               </Link>
+            </li>
+
+            <li
+            className={`px-4 py-2 flex items-center ${
               isActive("/gallery") ? "bg-gray-700 text-white" : "hover:bg-gray-700"
             }`}
             >
-               <FaHome className="mr-2" />
+               <FaImage className="mr-2" />
                <Link to="/gallery" className="flex-1 py-3">
                Galleria
                </Link>
