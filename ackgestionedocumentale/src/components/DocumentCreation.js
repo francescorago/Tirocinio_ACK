@@ -705,7 +705,7 @@ const renderSpecificFields = () => {
     const signatureY = pageHeight - margin;
     const signatureX = doc.internal.pageSize.width - 50;
 
-    doc.text("Firma Digitale: __________________", signatureX, signatureY, {
+    doc.text("Firma: __________________", signatureX, signatureY, {
       align: "right",
     }
   );
