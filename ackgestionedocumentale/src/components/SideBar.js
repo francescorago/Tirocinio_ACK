@@ -95,8 +95,9 @@ const Sidebar = () => {
               </Link>
             </li>
 
-            {/* Mostra il link "Archivio" solo se l'email è utente@1.it */}
-            {user?.email === "utente@1.it" && (
+            {/* Mostra il link "Archivio" solo se l'email è utente@1.it
+            {user?.email === "utente@1.it" && ( */}
+            
               <li
                 className={`px-4 py-2 flex items-center ${
                   isActive("/archive") ? "bg-gray-700 text-white" : "hover:bg-gray-700"
@@ -107,7 +108,7 @@ const Sidebar = () => {
                   Archivio
                 </Link>
               </li>
-            )}
+            
 
             <li
               className="px-4 py-2 hover:bg-gray-700 flex items-center cursor-pointer"
