@@ -78,10 +78,7 @@ const Profile = () => {
                       <p className="text-gray-500">Indirizzo Laboratorio:</p>
                       <p>{user.informazioniUtente.indirizzoLaboratorio || "Indirizzo Laboratorio"}</p>
                       </div>
-                            <div>
-                              <p className="text-gray-500">Depositi:</p>
-                              <p>{user.informazioniUtente.depositi || "Depositi"}</p>
-                              </div>
+                            
                             <div>
                               <p className="text-gray-500">Sito Web:</p>
                               <p>{user.informazioniUtente.sitoWeb || "Sito Web"}</p>

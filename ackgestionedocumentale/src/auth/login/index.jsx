@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import successAnimation from "../../assets/animationDocument.json";
@@ -29,7 +29,6 @@ const errorMessages = {
   [AuthErrorCodes.INVALID_PASSWORD]: "La password inserita è errata.",
   [AuthErrorCodes.NETWORK_REQUEST_FAILED]:
     "Errore di rete. Per favore, riprova.",
-  // Aggiungi altri codici di errore qui se necessario
 };
 
 const Login = () => {
@@ -41,9 +40,8 @@ const Login = () => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [animationFinished, setAnimationFinished] = useState(false);
   const [isEmailRegistered, setIsEmailRegistered] = useState(true);
-  
-  const [failedAttempts, setFailedAttempts] = useState(0); // Track failed attempts
-  const [blockUntil, setBlockUntil] = useState(null); // Track when to unblock the user
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [isPasswordLocked, setIsPasswordLocked] = useState(false);
 
   const db = getFirestore();
   const auth = getAuth();
@@ -62,14 +60,7 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    // If blocked, don't proceed
-    if (blockUntil && Date.now() < blockUntil) {
-      setErrorMessage("Hai raggiunto il limite di tentativi. Riprova tra 10 minuti.");
-      return;
-    }
-
-    if (!isSigningIn) {
+    if (!isSigningIn && !isPasswordLocked) {
       setIsSigningIn(true);
       setShowAnimation(false);
 
@@ -81,17 +72,18 @@ const Login = () => {
         }, 3000);
       } catch (error) {
         console.error("Errore:", error);
-        setFailedAttempts(prev => prev + 1); // Increment failed attempts
+        setFailedAttempts((prev) => prev + 1);
 
         if (failedAttempts + 1 >= 3) {
-          setBlockUntil(Date.now() + 10 * 60 * 1000); // Block for 10 minutes
-          setErrorMessage("Hai raggiunto il limite di tentativi. Riprova tra 10 minuti.");
+          setIsPasswordLocked(true);
+          setErrorMessage("Troppi tentativi, effettua il reset.");
         } else {
           setErrorMessage(
             errorMessages[AuthErrorCodes.INVALID_EMAIL] ||
-            "Errore sconosciuto. Per favore, riprova."
+              "Errore sconosciuto. Per favore, riprova."
           );
         }
+
         setIsSigningIn(false);
       }
     }
@@ -99,14 +91,7 @@ const Login = () => {
 
   const onGoogleSignIn = async (e) => {
     e.preventDefault();
-
-    // If blocked, don't proceed
-    if (blockUntil && Date.now() < blockUntil) {
-      setErrorMessage("Hai raggiunto il limite di tentativi. Riprova tra 10 minuti.");
-      return;
-    }
-
-    if (!isSigningIn) {
+    if (!isSigningIn && !isPasswordLocked) {
       setIsSigningIn(true);
       setShowAnimation(false);
 
@@ -131,20 +116,12 @@ const Login = () => {
         console.error("Errore:", error);
         setErrorMessage(
           errorMessages[AuthErrorCodes.INVALID_EMAIL] ||
-          "Errore sconosciuto. Per favore, riprova."
+            "Errore sconosciuto. Per favore, riprova."
         );
         setIsSigningIn(false);
       }
     }
   };
-
-  useEffect(() => {
-    // Reset failed attempts if more than 10 minutes have passed
-    if (blockUntil && Date.now() > blockUntil) {
-      setFailedAttempts(0);
-      setBlockUntil(null);
-    }
-  }, [blockUntil]);
 
   if (animationFinished) {
     return <Navigate to={"/home"} replace={true} />;
@@ -165,7 +142,7 @@ const Login = () => {
         )}
         <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border border-blue-600 rounded-xl">
           <div className="flex flex-col items-center justify-center mb-4">
-            <div className="w-60 h-15  rounded-full flex items-center justify-center border border-blue-600 mb-4">
+            <div className="w-60 h-15 rounded-full flex items-center justify-center border border-blue-600 mb-4">
               <img src={logo} alt="Logo" className="w-60 h-15 rounded-full " />
             </div>
             <div>
@@ -187,9 +164,7 @@ const Login = () => {
               />
             </div>
             <div>
-              <label className="text-sm text-gray-600 font-bold">
-                Password
-              </label>
+              <label className="text-sm text-gray-600 font-bold">Password</label>
               <input
                 type="password"
                 autoComplete="current-password"
@@ -197,6 +172,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+                disabled={isPasswordLocked}
               />
             </div>
             {errorMessage && (
@@ -204,9 +180,9 @@ const Login = () => {
             )}
             <button
               type="submit"
-              disabled={isSigningIn || (blockUntil && Date.now() < blockUntil)}
+              disabled={isSigningIn || isPasswordLocked}
               className={`w-full px-4 py-2 text-white font-medium rounded-lg ${
-                isSigningIn
+                isSigningIn || isPasswordLocked
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-blue-600 hover:bg-blue-700 hover:shadow-xl transition duration-300"
               }`}
@@ -232,10 +208,10 @@ const Login = () => {
             <div className="border-b-2 mb-2.5 ml-2 w-full"></div>
           </div>
           <button
-            disabled={isSigningIn}
+            disabled={isSigningIn || isPasswordLocked}
             onClick={onGoogleSignIn}
             className={`w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium ${
-              isSigningIn
+              isSigningIn || isPasswordLocked
                 ? "cursor-not-allowed"
                 : "hover:bg-gray-100 transition duration-300 active:bg-gray-100"
             }`}

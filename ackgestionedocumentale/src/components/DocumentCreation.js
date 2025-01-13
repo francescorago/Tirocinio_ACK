@@ -441,27 +441,25 @@ const renderSpecificFields = () => {
         cancelButtonColor: "red",
       });
 
-      if (result.isConfirmed) {
-        try {
-          // Salva il documento nella collezione "documentiAssociati"
-          await addDoc(collection(db, "documentiAssociati"), docData);
-          // Mostra messaggio di successo
-          Swal.fire("Successo", "Documento salvato con successo!", "success");
-          navigate("/Home"); // Torna alla home se il salvataggio ha successo
-        } catch (error) {
-          // Mostra errore in caso di fallimento
-          Swal.fire(
-            "Errore",
-            "Errore durante il download del documento",
-            "error"
-          );
-          console.error("Errore durante il download:", error);
+      try {
+        // Salva il documento in Firestore
+        await addDoc(collection(db, "documentiAssociati"), docData);
+    
+        // Successo
+        Swal.fire("Successo", "Documento salvato con successo!", "success");
+    
+        // Aggiorna la galleria
+        const galleriaCollection = collection(db, "documentiAssociati");
+        for (const url of photoURLs) {
+          await addDoc(galleriaCollection, { photoURLs: [url], id_documento: formData.codice });
         }
+    
+        navigate("/Home");
+      } catch (error) {
+        Swal.fire("Errore", "Errore durante il salvataggio", "error");
+        console.error("Errore durante il salvataggio:", error);
       }
-    } else {
-      // Se l'utente clicca su "No"
-      Swal.fire("Annullato", "Il salvataggio è stato annullato", "info");
-    }
+    };
   };
 
   const handleSign = async (e) => {
@@ -1274,6 +1272,7 @@ const renderSpecificFields = () => {
               </p>
             </div>
 
+            
             <div className="text-center sticky bottom-0 bg-white z-10 p-4">
               <div className="inline-flex space-x-4">
                 <button
@@ -1285,7 +1284,7 @@ const renderSpecificFields = () => {
                 </button>
                 <button
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  onClick={handleSave & handleHome}
+                  onClick={handleSave}
                 >
                   Salva
                 </button>
@@ -1301,6 +1300,7 @@ const renderSpecificFields = () => {
         </div>
       </div>
     </div>
+ 
   );
 };
 

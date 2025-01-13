@@ -4,6 +4,7 @@ import { doCreateUserWithEmailAndPassword, doSendEmailVerification } from '../..
 import { setDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
 
+
 const Register = () => {
   const [registerData, setRegisterData] = useState({
     nome: "",
@@ -29,6 +30,7 @@ const Register = () => {
     responsabileVendite2:"",
     firma:"",
   });
+  
 
   const handleNazioneChange = (e) => {
     const inputValue = e.target.value;
@@ -635,6 +637,8 @@ const Register = () => {
             />
           </div>
           
+
+      
           {/* Messaggio di Errore */}
           {errorMessage && (
             <div className="text-red-600 font-bold text-sm">

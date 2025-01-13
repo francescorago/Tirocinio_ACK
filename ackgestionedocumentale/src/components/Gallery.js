@@ -1,44 +1,79 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore"; // Per recuperare dati da Firestore
-import { db } from "../firebase/firebase"; // Assicurati che il percorso sia corretto
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase/firebase"; 
 import "../style.css";
+import { useUser } from "../userContext/UserContext";
 
 const Galleria = () => {
-  const [photos, setPhotos] = useState([]); // Stato per memorizzare le foto recuperate
+  const [photos, setPhotos] = useState([]);
+  const [sortCriteria, setSortCriteria] = useState("id"); // Default: ordina per ID
+  const user = useUser(); 
 
-  // Funzione per recuperare le foto da Firestore
   const fetchPhotos = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "documentiAssociati")); // Collezione da cui recuperare le foto
-      const photoData = [];
+    if (!user) {
+      console.error("Nessun utente autenticato");
+      return;
+    }
 
+    try {
+      const querySnapshot = await getDocs(
+        query(collection(db, "documentiAssociati"), where("id_utente", "==", user.id))
+      );
+
+      const photoData = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         if (data.photoURLs && data.id_documento) {
-          // Assumi che "photoURLs" sia un array di URL e "id_documento" sia l'ID associato
           data.photoURLs.forEach((url) => {
-            photoData.push({ url, id: data.id_documento });
+            photoData.push({ url, id: data.id_documento, date: data.data_importazione });
           });
         }
       });
 
-      setPhotos(photoData); // Aggiorna lo stato con i dati delle foto
+      setPhotos(photoData);
     } catch (error) {
       console.error("Errore nel recupero delle foto:", error);
     }
   };
 
-  // Effetto per recuperare le foto al caricamento della pagina
+  const handleSort = (criteria) => {
+    setSortCriteria(criteria);
+  };
+
   useEffect(() => {
     fetchPhotos();
-  }, []);
+  }, [user]);
+
+  const sortedPhotos = [...photos].sort((a, b) => {
+    if (sortCriteria === "id") {
+      return a.id.localeCompare(b.id);
+    } else if (sortCriteria === "date") {
+      return new Date(a.date) - new Date(b.date);
+    }
+    return 0;
+  });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <h1 className="text-2xl font-bold mb-6">Galleria</h1>
+    <div className="ml-64 p-4">
+      <div className="flex justify-center text-3xl mt-4 mb-4 font-bold">Galleria</div>
+      <div className="flex justify-center text-xl mt-4 mb-4">
+        In questa pagina puoi visualizzare tutte le immagini che hai caricato nei tuoi certificati.
+      </div>
+
+      <div className="flex justify-end mb-4">
+        <select
+          className="p-2 border rounded"
+          value={sortCriteria}
+          onChange={(e) => handleSort(e.target.value)}
+        >
+          <option value="id">Ordina per ID</option>
+          <option value="date">Ordina per Data</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {photos.length > 0 ? (
-          photos.map((photo, index) => (
+        {sortedPhotos.length > 0 ? (
+          sortedPhotos.map((photo, index) => (
             <div key={index} className="bg-white p-4 rounded shadow">
               <img
                 src={photo.url}
@@ -48,6 +83,11 @@ const Galleria = () => {
               <p className="mt-2 text-center text-sm text-gray-700">
                 ID: <span className="font-semibold">{photo.id}</span>
               </p>
+              {photo.date && (
+                <p className="text-center text-xs text-gray-500">
+                  Data: {new Date(photo.date).toLocaleDateString()}
+                </p>
+              )}
             </div>
           ))
         ) : (
