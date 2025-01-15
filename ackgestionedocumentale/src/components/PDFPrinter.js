@@ -4,6 +4,7 @@ import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/fire
 import { getStorage, ref, deleteObject } from 'firebase/storage'; // Importa da firebase/storage
 import { useUser } from '../userContext/UserContext';
 import { FaEye, FaTrash } from "react-icons/fa"; // Importa l'icona del cestino
+import { useTranslation } from "react-i18next";
 
 function PDFPrinter() {
   const [userFiles, setUserFiles] = useState([]);

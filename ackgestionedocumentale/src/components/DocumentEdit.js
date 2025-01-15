@@ -8,7 +8,7 @@ import { jsPDF } from "jspdf";
 import "../style.css";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { deleteDoc, setDoc } from "firebase/firestore";
-
+import { useTranslation } from "react-i18next";
 
 const DocumentEdit = () => {
   const { id } = useParams(); // Ottieni l'ID del documento dai parametri URL

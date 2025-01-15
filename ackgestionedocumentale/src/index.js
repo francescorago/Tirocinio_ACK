@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/authContext"; // Assicurati che il percorso sia corretto
 import { UserProvider } from "./userContext/UserContext"; // Importa il nuovo provider
+import './i18n'; // Importa la configurazione di i18n
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

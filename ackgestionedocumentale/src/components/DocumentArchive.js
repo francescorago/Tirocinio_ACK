@@ -15,6 +15,7 @@ import { db } from "../firebase/firebase";
 import Swal from "sweetalert2";
 import { useUser } from "../userContext/UserContext";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const DocumentArchive = () => {
   const [documents, setDocuments] = useState([]);

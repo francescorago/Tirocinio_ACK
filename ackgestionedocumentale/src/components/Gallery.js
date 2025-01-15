@@ -3,6 +3,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase"; 
 import "../style.css";
 import { useUser } from "../userContext/UserContext";
+import { useTranslation } from "react-i18next";
 
 const Galleria = () => {
   const [photos, setPhotos] = useState([]);

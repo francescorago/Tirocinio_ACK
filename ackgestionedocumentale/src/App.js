@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useRoutes } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
+import { FaFlagUsa, FaFlag } from "react-icons/fa"; // Icone delle bandiere
 
 import Login from "./auth/login/index";
 import ResetPassword from "./auth/login/resetPsswd";
@@ -20,9 +21,11 @@ import { useUser } from "../src/userContext/UserContext";
 import { FaUser } from "react-icons/fa";
 import AdminArchive from "./components/AdminArchive";
 import Gallery from "./components/Gallery";
+import { useTranslation } from "react-i18next";
 
 
 function App() {
+  const { t } = useTranslation();
   const location = useLocation(); // Usa useLocation per ottenere il percorso corrente
   const user = useUser();
 

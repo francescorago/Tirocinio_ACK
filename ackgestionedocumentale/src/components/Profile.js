@@ -3,6 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { db } from "../firebase/firebase";
 import { useUser } from "../userContext/UserContext"; 
 import usergrey from "../assets/usergrey.png";
+import { useTranslation } from "react-i18next";
 
 
 const Profile = () => {

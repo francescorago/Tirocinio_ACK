@@ -6,8 +6,11 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { doSignOut } from "../firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../userContext/UserContext";
+import { useTranslation } from 'react-i18next'; // Importa useTranslation
+import { FaFlagUsa, FaFlag } from "react-icons/fa"; // Icone delle bandiere
 
 const Sidebar = () => {
+  const { t, i18n } = useTranslation(); // Hook per le traduzioni 
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); // Hook per ottenere il percorso corrente
@@ -28,6 +31,10 @@ const Sidebar = () => {
 
   // Funzione per verificare se il link è attivo
   const isActive = (path) => location.pathname === path;
+  
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   return (
     <div
@@ -58,7 +65,7 @@ const Sidebar = () => {
             >
               <FaFileAlt className="mr-2" />
               <Link to="/document-archive" className="flex-1 py-3">
-                Documenti salvati
+              {t('Documenti_salvati')}
               </Link>
             </li>
             <li
@@ -68,7 +75,7 @@ const Sidebar = () => {
             >
               <FaPlus className="mr-2" />
               <Link to="/load-signed-document" className="flex-1 py-3">
-                Carica documenti firmati
+              {t('Documenti_firmati')}
               </Link>
             </li>
             
@@ -80,7 +87,7 @@ const Sidebar = () => {
             >
                <FaImage className="mr-2" />
                <Link to="/gallery" className="flex-1 py-3">
-               Galleria
+               {t('Galleria')}
                </Link>
             </li>
 
@@ -91,7 +98,7 @@ const Sidebar = () => {
             >
               <FaUser className="mr-2" />
               <Link to="/profile" className="flex-1 py-3">
-                Profilo
+                {t('Profilo')}
               </Link>
             </li>
 
@@ -105,7 +112,7 @@ const Sidebar = () => {
               >
                 <FaFileAlt className="mr-2" />
                 <Link to="/archive" className="flex-1 py-3">
-                  Archivio
+                {t('Archivio')} {/* Testo tradotto */}
                 </Link>
               </li>
             
@@ -123,6 +130,26 @@ const Sidebar = () => {
         <p className="flex text-xs text-gray-700 inline-block mt-0 ml-4 mb-2">
           <FaUser className="mr-1" /> {user?.email || "Non disponibile..."}
         </p>
+        {/* Bottoni con le bandiere */}
+      <div className="flex gap-4 mt-4">
+        {/* Bandiera Inglese */}
+        <button
+          onClick={() => changeLanguage("en")}
+          className="flex items-center gap-2 p-2 bg-gray-100 hover:bg-gray-200 rounded"
+        >
+          
+          <span>English</span>
+        </button>
+
+        {/* Bandiera Italiana */}
+        <button
+          onClick={() => changeLanguage("it")}
+          className="flex items-center gap-2 p-2 bg-gray-100 hover:bg-gray-200 rounded"
+        >
+          
+          <span>Italiano</span>
+        </button>
+    </div>
       </div>
   );
 };

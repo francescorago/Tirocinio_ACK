@@ -9,6 +9,7 @@ import { FaPlus, FaTimes } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import pdfToText from 'react-pdftotext';
 import { query, where, getDocs } from 'firebase/firestore';  // Aggiungi queste importazioni
+import { useTranslation } from "react-i18next";
 
 function PdfUploader() {
   const [file, setFile] = useState(null);

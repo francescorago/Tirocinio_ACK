@@ -4,12 +4,13 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { useUser } from "../userContext/UserContext";
 import PdfUploader from "./PdfUploader";
 import PDFPrinter from "./PDFPrinter";
+import { useTranslation } from "react-i18next";
 
 const LoadDocument = () => {
   const [documents, setDocuments] = useState([]); // State for documents
   const [loading, setLoading] = useState(true); // State for loading
   const user = useUser();
-
+  const { t } = useTranslation(); // Hook per traduzioni
   const fetchDocuments = () => {
     if (!user || !user.id) {
       setLoading(false);

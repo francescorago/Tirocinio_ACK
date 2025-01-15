@@ -9,7 +9,7 @@ import "../style.css";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getDocs, query, where } from "firebase/firestore";
 import SignatureCanvas from "react-signature-canvas";
-
+import { useTranslation } from "react-i18next";
 
 
 const DocumentCreation = () => {

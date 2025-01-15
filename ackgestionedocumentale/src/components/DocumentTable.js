@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase/firebase";
+import { useTranslation } from "react-i18next";
+
 
 const DocumentTable = ({ documents = [], onDocumentClick }) => {
   const [sortOrder, setSortOrder] = useState("asc");
